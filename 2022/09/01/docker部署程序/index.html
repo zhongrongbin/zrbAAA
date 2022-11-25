@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>docker部署程序 - ZRB的博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="RB,"> 
+    <meta name="description" content="1.source code见 src 目录下：《main.go》,《controller.go》,《service.go》,《mapper.go》,《user.go》.
+2.dockerfile见《,"> 
+    <meta name="author" content="Rongbin Zhong"> 
+    <link rel="alternative" href="atom.xml" title="ZRB的博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/zrb.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="docker部署程序 - ZRB的博客"/>
+    <meta name="twitter:description" content="1.source code见 src 目录下：《main.go》,《controller.go》,《service.go》,《mapper.go》,《user.go》.
+2.dockerfile见《,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="ZRB的博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="docker部署程序 - ZRB的博客"/>
+    <meta property="og:description" content="1.source code见 src 目录下：《main.go》,《controller.go》,《service.go》,《mapper.go》,《user.go》.
+2.dockerfile见《,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">ZRB的博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">docker部署程序</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">docker部署程序</h1>
+        <div class="stuff">
+            <span>九月 01, 2022</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-source-code"><a href="#1-source-code" class="headerlink" title="1.source code"></a>1.source code</h2><p>见 src 目录下：《main.go》,《controller.go》,《service.go》,《mapper.go》,《user.go》.</p>
+<h2 id="2-dockerfile"><a href="#2-dockerfile" class="headerlink" title="2.dockerfile"></a>2.dockerfile</h2><p>见《dockerfile》.</p>
+<h2 id="3-复制到linux目录下"><a href="#3-复制到linux目录下" class="headerlink" title="3.复制到linux目录下"></a>3.复制到linux目录下</h2><p>将上面的文件复制到Linux目录下.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># ls</span></span><br><span class="line">controller.go  dockerfile  main.go  mapper.go  service.go  user.go</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-制作镜像"><a href="#4-制作镜像" class="headerlink" title="4. 制作镜像"></a>4. 制作镜像</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-t : tag</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># docker build -t test:v0.1.2 .</span></span><br><span class="line">Sending build context to Docker daemon  14.34kB</span><br><span class="line">Step 1/7 : FROM golang:latest</span><br><span class="line"> ---&gt; 276895edf967</span><br><span class="line">Step 2/7 : MAINTAINER zhongrongbin@casachina.com.cn</span><br><span class="line"> ---&gt; Using cache</span><br><span class="line"> ---&gt; d40cc886be6b</span><br><span class="line">Step 3/7 : COPY . /usr/src/httpServer</span><br><span class="line"> ---&gt; 8106f3dfba3f</span><br><span class="line">Step 4/7 : WORKDIR /usr/src/httpServer</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 3bc07133e07b</span><br><span class="line">Removing intermediate container 3bc07133e07b</span><br><span class="line"> ---&gt; ea73eadb4492</span><br><span class="line">Step 5/7 : EXPOSE 80</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> d95d85d48d7d</span><br><span class="line">Removing intermediate container d95d85d48d7d</span><br><span class="line"> ---&gt; 39162dd82c62</span><br><span class="line">Step 6/7 : RUN go build -o server main.go controller.go service.go mapper.go user.go</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> eb92d98a2065</span><br><span class="line">Removing intermediate container eb92d98a2065</span><br><span class="line"> ---&gt; 9a274f15d320</span><br><span class="line">Step 7/7 : CMD ./server</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 1a7cae0541ea</span><br><span class="line">Removing intermediate container 1a7cae0541ea</span><br><span class="line"> ---&gt; 7e09d7c4eadb</span><br><span class="line">Successfully built 7e09d7c4eadb</span><br><span class="line">Successfully tagged <span class="built_in">test</span>:v0.1.2</span><br></pre></td></tr></table></figure>
+
+<p>查看镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment">#  docker images</span></span><br><span class="line">REPOSITORY                                                  TAG          IMAGE ID       CREATED          SIZE</span><br><span class="line"><span class="built_in">test</span>                                                        v0.1.2       7e09d7c4eadb   22 seconds ago   947MB</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-运行容器"><a href="#5-运行容器" class="headerlink" title="5.运行容器"></a>5.运行容器</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-d : 后台运行  -p: 端口</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># docker run -dp 127.0.0.1:80:80 test:v0.1.2</span></span><br><span class="line">bcf28eedcaab94d59f21cc3be476037a56800f81743332d1b3b82d0ab1560a29</span><br></pre></td></tr></table></figure>
+
+<p>查看容器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID   IMAGE                                                       COMMAND                  CREATED          STATUS          PORTS                                       NAMES</span><br><span class="line">bcf28eedcaab   <span class="built_in">test</span>:v0.1.2                                                 <span class="string">&quot;/bin/sh -c ./server&quot;</span>    30 seconds ago   Up 28 seconds   127.0.0.1:80-&gt;80/tcp                        recursing_wilbur</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-打开wireshark"><a href="#6-打开wireshark" class="headerlink" title="6.打开wireshark"></a>6.打开wireshark</h2><p>接下来，愉快地开始测试吧!</p>
+<h2 id="7-测试"><a href="#7-测试" class="headerlink" title="7.测试"></a>7.测试</h2><h3 id="function-1-hello"><a href="#function-1-hello" class="headerlink" title="function 1: hello"></a>function 1: hello</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~<span class="comment"># curl 127.0.0.1/hello</span></span><br><span class="line">200</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="function-2-添加用户"><a href="#function-2-添加用户" class="headerlink" title="function 2:添加用户"></a>function 2:添加用户</h3><h4 id="a-add-user-only-name"><a href="#a-add-user-only-name" class="headerlink" title="a.  add user, only name"></a>a.  add user, only name</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/add-user?name=zhao6</span></span><br><span class="line">201, user saved successfully</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="b-add-uesr-all-attributes"><a href="#b-add-uesr-all-attributes" class="headerlink" title="b. add uesr, all attributes"></a>b. add uesr, all attributes</h4><p><em><strong>linux 环境下，url 传递多参数时，需要加双引号。</strong></em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl &quot;127.0.0.1/add-user?name=qina7&amp;age=18&amp;sex=male&amp;address=beijing&quot;</span></span><br><span class="line">201, user saved successfully</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="c-add-user-some-attributes"><a href="#c-add-user-some-attributes" class="headerlink" title="c. add user, some attributes"></a>c. add user, some attributes</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl &quot;127.0.0.1/add-user?name=wang8&amp;age=10000&amp;sex=male&quot;201, user saved successfully</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="function-3-获取所有用户"><a href="#function-3-获取所有用户" class="headerlink" title="function 3:获取所有用户"></a>function 3:获取所有用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/get-all-user</span></span><br><span class="line">&#123;<span class="string">&quot;li4&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;li4&quot;</span>,<span class="string">&quot;age&quot;</span>:20,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;female&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;shenzhen&quot;</span>&#125;,<span class="string">&quot;qina7&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;qina7&quot;</span>,<span class="string">&quot;age&quot;</span>:18,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;male&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;beijing&quot;</span>&#125;,<span class="string">&quot;wang5&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wang5&quot;</span>,<span class="string">&quot;age&quot;</span>:21,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;male&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;beijing&quot;</span>&#125;,<span class="string">&quot;wang8&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wang8&quot;</span>,<span class="string">&quot;age&quot;</span>:10000,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;male&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;&quot;</span>&#125;,<span class="string">&quot;zhang3&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;zhang3&quot;</span>,<span class="string">&quot;age&quot;</span>:19,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;male&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;guangzhou&quot;</span>&#125;,<span class="string">&quot;zhao6&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;zhao6&quot;</span>,<span class="string">&quot;age&quot;</span>:0,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;&quot;</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="function-4-删除一个用户"><a href="#function-4-删除一个用户" class="headerlink" title="function 4:删除一个用户"></a>function 4:删除一个用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/delete-user?name=zhang3</span></span><br><span class="line">200, successfully deleted</span><br></pre></td></tr></table></figure>
+
+<p>zhang3 被删除:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/get-all-user</span></span><br><span class="line">&#123;<span class="string">&quot;li4&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;li4&quot;</span>,<span class="string">&quot;age&quot;</span>:20,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;female&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;shenzhen&quot;</span>&#125;,<span class="string">&quot;qina7&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;qina7&quot;</span>,<span class="string">&quot;age&quot;</span>:18,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;male&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;beijing&quot;</span>&#125;,<span class="string">&quot;wang5&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wang5&quot;</span>,<span class="string">&quot;age&quot;</span>:21,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;male&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;beijing&quot;</span>&#125;,<span class="string">&quot;wang8&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wang8&quot;</span>,<span class="string">&quot;age&quot;</span>:10000,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;male&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;&quot;</span>&#125;,<span class="string">&quot;zhao6&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;zhao6&quot;</span>,<span class="string">&quot;age&quot;</span>:0,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;&quot;</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="function-5-删除所有用户"><a href="#function-5-删除所有用户" class="headerlink" title="function 5:删除所有用户"></a>function 5:删除所有用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/delete-all-user</span></span><br><span class="line">200, delete all <span class="built_in">users</span> successfully</span><br></pre></td></tr></table></figure>
+
+
+
+<p>所有用户被删除：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/get-all-user</span></span><br><span class="line">no user</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="function-6：更新用户属性"><a href="#function-6：更新用户属性" class="headerlink" title="function 6：更新用户属性"></a>function 6：更新用户属性</h3><h4 id="a-update-user-all-attributes"><a href="#a-update-user-all-attributes" class="headerlink" title="a. update user, all attributes"></a>a. update user, all attributes</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl &quot;127.0.0.1/add-user?name=wang8&amp;age=10000&amp;sex=male&quot;</span></span><br><span class="line">201, user saved successfully</span><br><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/get-all-user</span></span><br><span class="line">&#123;<span class="string">&quot;wang8&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wang8&quot;</span>,<span class="string">&quot;age&quot;</span>:10000,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;male&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;&quot;</span>&#125;&#125;</span><br><span class="line">root@ubuntu:~/test<span class="comment"># curl &quot;127.0.0.1/update-user?name=wang8&amp;age=90000&amp;sex=female&amp;address=ganzhou&quot;</span></span><br><span class="line">201, user update successfully</span><br><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/get-all-user</span></span><br><span class="line">&#123;<span class="string">&quot;wang8&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wang8&quot;</span>,<span class="string">&quot;age&quot;</span>:90000,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;female&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;ganzhou&quot;</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="b-update-user-some-attributes"><a href="#b-update-user-some-attributes" class="headerlink" title="b. update user, some attributes"></a>b. update user, some attributes</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/get-all-user</span></span><br><span class="line">&#123;<span class="string">&quot;wang8&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wang8&quot;</span>,<span class="string">&quot;age&quot;</span>:90000,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;female&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;ganzhou&quot;</span>&#125;&#125;</span><br><span class="line">root@ubuntu:~/test<span class="comment"># curl &quot;127.0.0.1/update-user?name=wang8&amp;age=18&amp;address=beijing&quot;</span></span><br><span class="line">201, user update successfully</span><br><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/get-all-user</span></span><br><span class="line">&#123;<span class="string">&quot;wang8&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wang8&quot;</span>,<span class="string">&quot;age&quot;</span>:18,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;female&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;beijing&quot;</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><h4 id="Add-an-existing-user"><a href="#Add-an-existing-user" class="headerlink" title="Add an existing user"></a>Add an existing user</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl &quot;127.0.0.1/add-user?name=wang8&amp;age=20&quot;</span></span><br><span class="line">user already exist</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="delete-a-non-existent-user"><a href="#delete-a-non-existent-user" class="headerlink" title="delete a non-existent user"></a>delete a non-existent user</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl &quot;127.0.0.1/delete-user?name=zhang3&quot;</span></span><br><span class="line">user does not exist</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Update-a-non-existent-user"><a href="#Update-a-non-existent-user" class="headerlink" title="Update a non-existent user"></a>Update a non-existent user</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl &quot;127.0.0.1/update-user?name=zhang3&amp;age=18&amp;address=beijing&quot;</span></span><br><span class="line">user does not exist</span><br></pre></td></tr></table></figure>
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci="7ebf69d7d37e764fc978"
+        data-cs="f1d17dce3417ae7633733671c141f49b19e9e3c3"
+        data-r="gitalk-comments"
+        data-o="zhongrongbin"
+        data-a="zhongrongbin"
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-source-code"><span class="toc-number">1.</span> <span class="toc-text">1.source code</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-dockerfile"><span class="toc-number">2.</span> <span class="toc-text">2.dockerfile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%A4%8D%E5%88%B6%E5%88%B0linux%E7%9B%AE%E5%BD%95%E4%B8%8B"><span class="toc-number">3.</span> <span class="toc-text">3.复制到linux目录下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F"><span class="toc-number">4.</span> <span class="toc-text">4. 制作镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">5.运行容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%89%93%E5%BC%80wireshark"><span class="toc-number">6.</span> <span class="toc-text">6.打开wireshark</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%B5%8B%E8%AF%95"><span class="toc-number">7.</span> <span class="toc-text">7.测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#function-1-hello"><span class="toc-number">7.1.</span> <span class="toc-text">function 1: hello</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#function-2-%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7"><span class="toc-number">7.2.</span> <span class="toc-text">function 2:添加用户</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-add-user-only-name"><span class="toc-number">7.2.1.</span> <span class="toc-text">a.  add user, only name</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-add-uesr-all-attributes"><span class="toc-number">7.2.2.</span> <span class="toc-text">b. add uesr, all attributes</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-add-user-some-attributes"><span class="toc-number">7.2.3.</span> <span class="toc-text">c. add user, some attributes</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#function-3-%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7"><span class="toc-number">7.3.</span> <span class="toc-text">function 3:获取所有用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#function-4-%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AA%E7%94%A8%E6%88%B7"><span class="toc-number">7.4.</span> <span class="toc-text">function 4:删除一个用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#function-5-%E5%88%A0%E9%99%A4%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7"><span class="toc-number">7.5.</span> <span class="toc-text">function 5:删除所有用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#function-6%EF%BC%9A%E6%9B%B4%E6%96%B0%E7%94%A8%E6%88%B7%E5%B1%9E%E6%80%A7"><span class="toc-number">7.6.</span> <span class="toc-text">function 6：更新用户属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-update-user-all-attributes"><span class="toc-number">7.6.1.</span> <span class="toc-text">a. update user, all attributes</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-update-user-some-attributes"><span class="toc-number">7.6.2.</span> <span class="toc-text">b. update user, some attributes</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="toc-number">7.7.</span> <span class="toc-text">错误处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Add-an-existing-user"><span class="toc-number">7.7.1.</span> <span class="toc-text">Add an existing user</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#delete-a-non-existent-user"><span class="toc-number">7.7.2.</span> <span class="toc-text">delete a non-existent user</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Update-a-non-existent-user"><span class="toc-number">7.7.3.</span> <span class="toc-text">Update a non-existent user</span></a></li></ol></li></ol></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+

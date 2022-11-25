@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>烦人的go导包 - ZRB的博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="RB,"> 
+    <meta name="description" content="导入自己写的文件1.Project gopath 设置为项目路径
+2.将文件放在src目录下
+导入外部文件go get 后, 导入爆红：
+
+"> 
+    <meta name="author" content="Rongbin Zhong"> 
+    <link rel="alternative" href="atom.xml" title="ZRB的博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/zrb.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="烦人的go导包 - ZRB的博客"/>
+    <meta name="twitter:description" content="导入自己写的文件1.Project gopath 设置为项目路径
+2.将文件放在src目录下
+导入外部文件go get 后, 导入爆红：
+
+"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="ZRB的博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="烦人的go导包 - ZRB的博客"/>
+    <meta property="og:description" content="导入自己写的文件1.Project gopath 设置为项目路径
+2.将文件放在src目录下
+导入外部文件go get 后, 导入爆红：
+
+"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">ZRB的博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">烦人的go导包</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">烦人的go导包</h1>
+        <div class="stuff">
+            <span>九月 16, 2022</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h1 id="导入自己写的文件"><a href="#导入自己写的文件" class="headerlink" title="导入自己写的文件"></a>导入自己写的文件</h1><h2 id="1-Project-gopath-设置为项目路径"><a href="#1-Project-gopath-设置为项目路径" class="headerlink" title="1.Project gopath 设置为项目路径"></a>1.Project gopath 设置为项目路径</h2><p><img src="/images/%E7%83%A6%E4%BA%BA%E7%9A%84go%E5%AF%BC%E5%8C%85/p1.png" alt="project path"></p>
+<h2 id="2-将文件放在src目录下"><a href="#2-将文件放在src目录下" class="headerlink" title="2.将文件放在src目录下"></a>2.将文件放在src目录下</h2><p><img src="/images/%E7%83%A6%E4%BA%BA%E7%9A%84go%E5%AF%BC%E5%8C%85/p2.png" alt="src"></p>
+<h1 id="导入外部文件"><a href="#导入外部文件" class="headerlink" title="导入外部文件"></a>导入外部文件</h1><p>go get 后, 导入爆红：</p>
+<p><img src="/images/%E7%83%A6%E4%BA%BA%E7%9A%84go%E5%AF%BC%E5%8C%85/p3.png" alt="moudle"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci="7ebf69d7d37e764fc978"
+        data-cs="f1d17dce3417ae7633733671c141f49b19e9e3c3"
+        data-r="gitalk-comments"
+        data-o="zhongrongbin"
+        data-a="zhongrongbin"
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">导入自己写的文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Project-gopath-%E8%AE%BE%E7%BD%AE%E4%B8%BA%E9%A1%B9%E7%9B%AE%E8%B7%AF%E5%BE%84"><span class="toc-number">1.1.</span> <span class="toc-text">1.Project gopath 设置为项目路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%B0%86%E6%96%87%E4%BB%B6%E6%94%BE%E5%9C%A8src%E7%9B%AE%E5%BD%95%E4%B8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">2.将文件放在src目录下</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E5%A4%96%E9%83%A8%E6%96%87%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">导入外部文件</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+

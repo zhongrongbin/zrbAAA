@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>prometheus入门 - ZRB的博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="RB,"> 
+    <meta name="description" content="PrometheusPrometheus 是一款基于时序数据库的开源监控告警系统。
+1.核心组件整个Prometheus生态包含多个组件，除了Prometheus server组件其余都是可选的
+
+,"> 
+    <meta name="author" content="Rongbin Zhong"> 
+    <link rel="alternative" href="atom.xml" title="ZRB的博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/zrb.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="prometheus入门 - ZRB的博客"/>
+    <meta name="twitter:description" content="PrometheusPrometheus 是一款基于时序数据库的开源监控告警系统。
+1.核心组件整个Prometheus生态包含多个组件，除了Prometheus server组件其余都是可选的
+
+,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="ZRB的博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="prometheus入门 - ZRB的博客"/>
+    <meta property="og:description" content="PrometheusPrometheus 是一款基于时序数据库的开源监控告警系统。
+1.核心组件整个Prometheus生态包含多个组件，除了Prometheus server组件其余都是可选的
+
+,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">ZRB的博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">prometheus入门</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">prometheus入门</h1>
+        <div class="stuff">
+            <span>九月 30, 2022</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="Prometheus"><a href="#Prometheus" class="headerlink" title="Prometheus"></a>Prometheus</h2><p><a target="_blank" rel="noopener" href="https://prometheus.io/">Prometheus</a> 是一款基于时序数据库的开源监控告警系统。</p>
+<h3 id="1-核心组件"><a href="#1-核心组件" class="headerlink" title="1.核心组件"></a>1.核心组件</h3><p>整个Prometheus生态包含多个组件，除了Prometheus server组件其余都是可选的</p>
+<ul>
+<li><strong>Prometheus Server</strong>：主要的核心组件，用来收集和存储时间序列数据。</li>
+<li><strong>Client Library</strong>：客户端库，为需要监控的服务生成相应的 metrics 并暴露给 Prometheus server。当 Prometheus server 来 pull 时，直接返回实时状态的 metrics。</li>
+<li><strong>push gateway</strong>：主要用于短期的 jobs。由于这类 jobs 存在时间较短，可能在 Prometheus 来 pull 之前就消失了。为此，这次 jobs 可以直接向 Prometheus server 端推送它们的 metrics。这种方式主要用于服务层面的 metrics，对于机器层面的 metrices，需要使用 node exporter。</li>
+<li><strong>Exporters</strong>: 用于暴露已有的第三方服务的 metrics 给 Prometheus。</li>
+<li><strong>Alertmanager</strong>: 从 Prometheus server 端接收到 alerts 后，会进行去除重复数据，分组，并路由到对收的接受方式，发出报警。常见的接收方式有：电子邮件，pagerduty，OpsGenie, webhook 等。</li>
+<li>各种支持工具。</li>
+</ul>
+<p><img src="/images/prometheus%E5%85%A5%E9%97%A8/jiagou.png" alt="jiagou"></p>
+<h3 id="2-模块介绍"><a href="#2-模块介绍" class="headerlink" title="2.模块介绍"></a>2.<strong>模块介绍</strong></h3><ul>
+<li><strong>Retrieval</strong>是负责定时去暴露的目标页面上去抓取采样指标数据。</li>
+<li><strong>Storage</strong> 是负责将采样数据写入指定的时序数据库存储。</li>
+<li><strong>PromQL</strong> 是Prometheus提供的查询语言模块。可以和一些webui比如grfana集成。</li>
+<li><strong>Jobs &#x2F; Exporters</strong>:Prometheus 可以从 Jobs 或 Exporters 中拉取监控数据。Exporter 以 Web API 的形式对外暴露数据采集接口。</li>
+<li><strong>Prometheus Server</strong>:Prometheus 还可以从其他的 Prometheus Server 中拉取数据。</li>
+<li><strong>Pushgateway</strong>:对于一些以临时性 Job 运行的组件，Prometheus 可能还没有来得及从中 pull 监控数据的情况下，这些 Job 已经结束了，Job 运行时可以在运行时将监控数据推送到 Pushgateway 中，Prometheus 从 Pushgateway 中拉取数据，防止监控数据丢失。</li>
+<li><strong>Service discovery</strong>:是指 Prometheus 可以动态的发现一些服务，拉取数据进行监控，如从DNS，Kubernetes，Consul 中发现, file_sd 是静态配置的文件。</li>
+<li><strong>AlertManager</strong>:是一个独立于 Prometheus 的外部组件，用于监控系统的告警，通过配置文件可以配置一些告警规则，Prometheus 会把告警推送到 AlertManager。</li>
+</ul>
+<h3 id="3-工作流程"><a href="#3-工作流程" class="headerlink" title="3.工作流程"></a>3.工作流程</h3><p>大概的工作流程如下：</p>
+<ul>
+<li>Prometheus server 定期从配置好的 jobs，exporters，Pushgateway  中拉 metrics，或者从其他的 Prometheus server 中拉 metrics。</li>
+<li>Prometheus server 在本地存储收集到的 metrics，并运行已定义好的 alert.rules，记录新的时间序列或者向 Alertmanager 推送警报。</li>
+<li>Alertmanager 根据配置文件，对接收到的警报进行处理，发出告警。</li>
+<li>在图形界面中，可视化采集数据。</li>
+</ul>
+<h3 id="4-多维度数据模型"><a href="#4-多维度数据模型" class="headerlink" title="4.多维度数据模型"></a>4.多维度数据模型</h3><h4 id="（1）数据模型"><a href="#（1）数据模型" class="headerlink" title="（1）数据模型"></a>（1）数据模型</h4><p>Prometheus 存储的所有数据都是<strong>时间序列数据</strong>（<strong>Time Serie Data</strong>，简称时序数据）。时序数据是具有时间戳的数据流，该数据流属于某个度量指标（Metric）和该度量指标下的多个标签（Label）。</p>
+<p><img src="/images/prometheus%E5%85%A5%E9%97%A8/datamodel.png" alt="datamodel"></p>
+<p>每个Metric name代表了一类的指标，他们可以携带不同的Labels，每个Metric name + Label组合成代表了一条时间序列的数据。</p>
+<p>在Prometheus的世界里面，所有的数值都是64bit的。每条时间序列里面记录的其实就是**64bit timestamp(时间戳) + 64bit value(采样值)**。</p>
+<ul>
+<li><strong>Metric name（指标名称）</strong>：该名字应该具有语义，一般用于表示 metric 的功能，例如：http_requests_total, 表示 http 请求的总数。其中，metric 名字由 ASCII 字符，数字，下划线，以及冒号组成，且必须满足正则表达式 [a-zA-Z_:][a-zA-Z0-9_:]*。</li>
+<li><strong>Lables（标签）</strong>：使同一个时间序列有了不同维度的识别。例如 http_requests_total{method&#x3D;“Get”} 表示所有 http 请求中的 Get 请求。当 method&#x3D;“post” 时，则为新的一个 metric。标签中的键由 ASCII 字符，数字，以及下划线组成，且必须满足正则表达式 [a-zA-Z_:][a-zA-Z0-9_:]*。</li>
+<li>**timestamp(时间戳)**：数据点的时间，表示数据记录的时间。</li>
+<li><strong>Sample Value（采样值）</strong>：实际的时间序列，每个序列包括一个 float64 的值和一个毫秒级的时间戳。</li>
+</ul>
+<h4 id="（2）metric类型"><a href="#（2）metric类型" class="headerlink" title="（2）metric类型"></a>（2）metric类型</h4><p>虽然 Prometheus 里存储的数据都是 float64 的一个数值，但如果我们按类型来分，可以把 Prometheus 的数据分成四大类：</p>
+<ul>
+<li>Counter（计数器）</li>
+<li>Gauge（仪表盘）</li>
+<li>Histogram（直方图）</li>
+<li>Summary（摘要）</li>
+</ul>
+<p>Counter 用于计数，例如：请求次数、任务完成数、错误发生次数，这个值会一直增加，不会减少。</p>
+<p>Gauge 是一个<strong>瞬时值</strong>，如当前内存用量，它随着时间变化忽高忽低。</p>
+<p>Histogram 是直方图，或称为柱状图，常用于跟踪事件发生的规模，例如：请求耗时、响应大小。它特别之处是可以对记录的内容进行分组，提供 count 和 sum 的功能。</p>
+<p>Summary 和 Histogram 十分相似，也用于跟踪事件发生的规模，不同之处是，它提供了一个 quantiles 的功能，可以按百分比划分跟踪的结果。例如：quantile 取值 0.95，表示取采样值里面的 95% 数据。</p>
+<p>这四种类型的数据只在指标的提供方作区分，也就是上面说的 Exporter，如果你需要编写自己的 Exporter 或者在现有系统中暴露供 Prometheus 抓取的指标，你可以使用 <a target="_blank" rel="noopener" href="https://prometheus.io/docs/instrumenting/clientlibs/">Prometheus client libraries</a>，这个时候你就需要考虑不同指标的数据类型了。</p>
+<h3 id="5-灵活的数据采集"><a href="#5-灵活的数据采集" class="headerlink" title="5.灵活的数据采集"></a>5.灵活的数据采集</h3><p>要采集目标的监控数据，首先需要在目标处安装数据采集组件，这被称之为 <strong>Exporter</strong>，它会在目标处收集监控数据，并暴露出一个 HTTP 接口供 Prometheus 查询，Prometheus 通过 Pull 的方式来采集数据，这和传统的 Push 模式不同。不过 Prometheus 也提供了一种方式来支持 Push 模式，你可以将你的数据推送到 <strong>Push Gateway</strong>，Prometheus 通过 Pull 的方式从 Push Gateway 获取数据。</p>
+<h3 id="6-强大的查询语言"><a href="#6-强大的查询语言" class="headerlink" title="6.强大的查询语言"></a>6.强大的查询语言</h3><h4 id="（1）即时矢量选择器"><a href="#（1）即时矢量选择器" class="headerlink" title="（1）即时矢量选择器"></a>（1）即时矢量选择器</h4><p>即时向量选择器允许选择一组时间序列，或者某个给定的时间戳的样本数据。下面这个例子选择了具有http_requests_total的时间序列：</p>
+<blockquote>
+<p>http_requests_total</p>
+</blockquote>
+<p>你可以通过附加一组标签，并用{}括起来，来进一步筛选这些时间序列。下面这个例子只选择有http_requests_total名称的、有prometheus工作标签的、有canary组标签的时间序列：</p>
+<blockquote>
+<p>http_requests_total{job&#x3D;”prometheus”,group&#x3D;”canary”}</p>
+</blockquote>
+<p>另外，也可以也可以将标签值反向匹配，或者对正则表达式匹配标签值。下面列举匹配操作符：</p>
+<ul>
+<li>&#x3D;：选择正好相等的字符串标签</li>
+<li>!&#x3D;：选择不相等的字符串标签</li>
+<li>&#x3D;~：选择匹配正则表达式的标签（或子标签）</li>
+<li>!~：选择不匹配正则表达式的标签（或子标签）</li>
+</ul>
+<p>例如，选择staging、testing、development环境下的，GET之外的HTTP方法的http_requests_total的时间序列：</p>
+<blockquote>
+<p>http_requests_total{environment&#x3D;~”staging|testing|development”,method!&#x3D;”GET”}</p>
+</blockquote>
+<h4 id="（2）范围矢量选择器"><a href="#（2）范围矢量选择器" class="headerlink" title="（2）范围矢量选择器"></a>（2）范围矢量选择器</h4><p>范围向量表达式正如即时向量表达式一样运行，但是前者返回从当前时刻开始的一定时间范围的时间序列集合回来。语法是，在一个向量表达式之后添加[]来表示时间范围，持续时间用数字表示，后接下面单元之一：</p>
+<ul>
+<li>s：seconds</li>
+<li>m：minutes</li>
+<li>h：hours</li>
+<li>d：days</li>
+<li>w：weeks</li>
+<li>y：years</li>
+</ul>
+<p>在下面这个例子中，我们选择最后5分钟的记录，metric名称为http_requests_total、作业标签为prometheus的时间序列的所有值：</p>
+<blockquote>
+<p>http_requests_total{job&#x3D;”prometheus”}[5m]</p>
+</blockquote>
+<h4 id="（3）偏移量修改器"><a href="#（3）偏移量修改器" class="headerlink" title="（3）偏移量修改器"></a>（3）偏移量修改器</h4><p>所述offset可以改变时间为查询中的个别时刻和范围矢量偏移。例如，以下表达式返回http_requests_total相对于当前查询评估时间的过去5分钟值 ：</p>
+<blockquote>
+<p>http_requests_total offset 5m</p>
+</blockquote>
+<p>同样适用于范围向量。这将返回http_requests_total一周前的5分钟费率 ：</p>
+<blockquote>
+<p>rate(http_requests_total[5m] offset 1w)</p>
+</blockquote>
+<p>更多<strong>操作符</strong>，请参考<a target="_blank" rel="noopener" href="https://prometheus.io/docs/prometheus/latest/querying/operators/">官方文档</a></p>
+<h4 id="（4）使用聚合操作"><a href="#（4）使用聚合操作" class="headerlink" title="（4）使用聚合操作"></a>（4）使用聚合操作</h4><blockquote>
+<p>PromQL提供的聚合操作可以用来对这些时间序列进行处理，形成一条新的时间序列</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查询系统所有http请求的总量</span></span><br><span class="line"><span class="built_in">sum</span>(http_request_total)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照mode计算主机CPU的平均使用时间</span></span><br><span class="line">avg(node_cpu) by (mode)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照主机查询各个主机的CPU使用率</span></span><br><span class="line"><span class="built_in">sum</span>(<span class="built_in">sum</span>(irate(node_cpu&#123;mode!=<span class="string">&#x27;idle&#x27;</span>&#125;[5m]))  / <span class="built_in">sum</span>(irate(node_cpu[5m]))) by (instance)</span><br></pre></td></tr></table></figure>
+
+<p>常见的聚合函数</p>
+<blockquote>
+<p>sum (求和)<br>min (最小值)<br>max (最大值)<br>avg (平均值)<br>stddev (标准差)<br>stdvar (标准方差)<br>count (计数)<br>count_values (对value进行计数)<br>bottomk (后n条时序)<br>topk (前n条时序)<br>quantile (分位数)</p>
+</blockquote>
+<h3 id="7-exporter规范"><a href="#7-exporter规范" class="headerlink" title="7.exporter规范"></a>7.exporter规范</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># HELP aggregator_openapi_v2_regeneration_duration [ALPHA] Gauge of OpenAPI v2 spec regeneration duration in seconds.</span></span><br><span class="line"><span class="comment"># TYPE aggregator_openapi_v2_regeneration_duration gauge</span></span><br><span class="line">aggregator_openapi_v2_regeneration_duration&#123;reason=<span class="string">&quot;add&quot;</span>&#125; 0.929158077</span><br><span class="line">aggregator_openapi_v2_regeneration_duration&#123;reason=<span class="string">&quot;startup&quot;</span>&#125; 0.509336209</span><br></pre></td></tr></table></figure>
+
+<p>Exporter返回的样本数据，主要由三个部分组成：<strong>样本的一般注释信息（HELP），样本的类型注释信息（TYPE）和样本</strong>。</p>
+<p>Prometheus会对Exporter响应的内容逐行解析：</p>
+<ul>
+<li>如果当前行以# HELP开始，Prometheus将会按照以下规则对内容进行解析，得到当前的指标名称以及相应的说明信息：</li>
+</ul>
+<blockquote>
+<p># HELP <metrics_name> <doc_string></doc_string></metrics_name></p>
+</blockquote>
+<ul>
+<li>如果当前行以# TYPE开始，Prometheus会按照以下规则对内容进行解析，得到当前的指标名称以及指标类型:</li>
+</ul>
+<blockquote>
+<p># TYPE <metrics_name> <metrics_type></metrics_type></metrics_name></p>
+</blockquote>
+<ul>
+<li><strong>TYPE注释行必须出现在指标的第一个样本之前</strong>。如果没有明确的指标类型需要返回为untyped。 除了# 开头的所有行都会被视为是监控样本数据。 每一行样本需要满足以下格式规范:</li>
+</ul>
+<blockquote>
+<p>metric_name [<br>“{“ label_name “&#x3D;” <code>&quot;</code> label_value <code>&quot;</code> { “,” label_name “&#x3D;” <code>&quot;</code> label_value <code>&quot;</code> } [ “,” ] “}”<br>] value [ timestamp ]</p>
+</blockquote>
+<h3 id="8-服务发现"><a href="#8-服务发现" class="headerlink" title="8.服务发现"></a>8.服务发现</h3><blockquote>
+<p>任何被监控的目标都需要事先纳入到监控系统中才能进行时序数据采集、存储、告警和展示，监控目标可以通过配置信息以<strong>静态形式指定</strong>，也可以让Prometheus通过<strong>服务发现</strong>的机制进行动态管理。</p>
+</blockquote>
+<h4 id="（1）传统配置"><a href="#（1）传统配置" class="headerlink" title="（1）传统配置"></a>（1）传统配置</h4><p>讲服务发现之前，先来讲一下<strong>传统配置方式</strong>:</p>
+<ol>
+<li>首先需要安装node-exporter，获取node metrics，并且暴露一个端口；</li>
+<li>然后去Prometheus Server的prometheus.yaml文件中在scarpe_config中添加node-exporter的job，配置node-exporter的地址和端口等信息；</li>
+<li>再然后，<strong>需要重启Prometheus服务</strong>；</li>
+<li>最后等待prometheus服务来拉取监控信息，就完成添加一个node-exporter监控的任务。</li>
+</ol>
+<h4 id="（2）kube-prometheus服务自动发现"><a href="#（2）kube-prometheus服务自动发现" class="headerlink" title="（2）kube-prometheus服务自动发现"></a>（2）kube-prometheus服务自动发现</h4><ol>
+<li>首先第一步和传统方式一样，部署一个node-exporter来获取监控项；</li>
+<li>然后编写一个ServiceMonitor通过labelSelector选择刚才部署的node-exporter，由于Operator在部署Prometheus的时候默认指定了Prometheus选择label为：prometheus: kube-prometheus的ServiceMonitor，所以只需要在ServiceMonitor上打上prometheus: kube-prometheus标签就可以被Prometheus选择了；</li>
+<li>完成以上两步就完成了对主机资源的监控，不需要改Prometheus配置文件，也<strong>不需要重启Prometheus服务</strong>，是不是很方便，Operator观察到ServiceMonitor发生变化，会动态生成Prometheus配置文件，并保证配置文件实时生效。</li>
+</ol>
+<p>目前，在Kubernetes下，Prometheus 通过与 Kubernetes API 集成主要支持5种服务发现模式：Node、Service、Pod、Endpoints、Ingress。不同的服务发现模式适用于不同的场景，例如：node适用于与主机相关的监控资源，如节点中运行的Kubernetes 组件状态、节点上运行的容器状态等；service 和 ingress 适用于通过黑盒监控的场景，如对服务的可用性以及服务质量的监控；endpoints 和 pod 均可用于获取 Pod 实例的监控数据，如监控用户或者管理员部署的支持 Prometheus 的应用。</p>
+<h2 id="Grafana"><a href="#Grafana" class="headerlink" title="Grafana"></a>Grafana</h2><p><a target="_blank" rel="noopener" href="https://grafana.com/">Grafana</a> 是一个用于可视化大型测量数据的开源系统监测 (System Monitoring) 工具。</p>
+<p>它的功能非常强大，界面也非常漂亮，使用它可以创建自定义的控制面板，你可以在面板中配置要显示的数据和显示方式，它 <a target="_blank" rel="noopener" href="https://grafana.com/plugins?type=datasource">支持很多不同的数据源</a>，比如：Graphite、InfluxDB、OpenTSDB、Elasticsearch、Prometheus 等，而且它也 <a target="_blank" rel="noopener" href="https://grafana.com/plugins">支持众多的插件</a>。</p>
+<h2 id="refer"><a href="#refer" class="headerlink" title="refer"></a>refer</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liugp/p/16459922.html">Prometheus原理详解</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.aneasystone.com/archives/2018/11/prometheus-in-action.html">实战 Prometheus 搭建监控系统</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1802679">Kubernetes 集群监控 kube-prometheus 自动发现</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1807679">Grafana 中文入门教程 | 构建你的第一个仪表盘</a></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci="7ebf69d7d37e764fc978"
+        data-cs="f1d17dce3417ae7633733671c141f49b19e9e3c3"
+        data-r="gitalk-comments"
+        data-o="zhongrongbin"
+        data-a="zhongrongbin"
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Prometheus"><span class="toc-number">1.</span> <span class="toc-text">Prometheus</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6"><span class="toc-number">1.1.</span> <span class="toc-text">1.核心组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%A8%A1%E5%9D%97%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.2.</span> <span class="toc-text">2.模块介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">3.工作流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%A4%9A%E7%BB%B4%E5%BA%A6%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.4.</span> <span class="toc-text">4.多维度数据模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.4.1.</span> <span class="toc-text">（1）数据模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89metric%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.4.2.</span> <span class="toc-text">（2）metric类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%81%B5%E6%B4%BB%E7%9A%84%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86"><span class="toc-number">1.5.</span> <span class="toc-text">5.灵活的数据采集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%BC%BA%E5%A4%A7%E7%9A%84%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80"><span class="toc-number">1.6.</span> <span class="toc-text">6.强大的查询语言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%8D%B3%E6%97%B6%E7%9F%A2%E9%87%8F%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.6.1.</span> <span class="toc-text">（1）即时矢量选择器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E8%8C%83%E5%9B%B4%E7%9F%A2%E9%87%8F%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.6.2.</span> <span class="toc-text">（2）范围矢量选择器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%81%8F%E7%A7%BB%E9%87%8F%E4%BF%AE%E6%94%B9%E5%99%A8"><span class="toc-number">1.6.3.</span> <span class="toc-text">（3）偏移量修改器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E4%BD%BF%E7%94%A8%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C"><span class="toc-number">1.6.4.</span> <span class="toc-text">（4）使用聚合操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-exporter%E8%A7%84%E8%8C%83"><span class="toc-number">1.7.</span> <span class="toc-text">7.exporter规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0"><span class="toc-number">1.8.</span> <span class="toc-text">8.服务发现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E4%BC%A0%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="toc-number">1.8.1.</span> <span class="toc-text">（1）传统配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89kube-prometheus%E6%9C%8D%E5%8A%A1%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0"><span class="toc-number">1.8.2.</span> <span class="toc-text">（2）kube-prometheus服务自动发现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Grafana"><span class="toc-number">2.</span> <span class="toc-text">Grafana</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#refer"><span class="toc-number">3.</span> <span class="toc-text">refer</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>blog发布流程</title>
+    <url>/2022/09/01/blog%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># md文档加入以下内容，复制到source/_posts/目录下</span></span><br><span class="line">---</span><br><span class="line">title: 标题</span><br><span class="line"><span class="built_in">date</span>: 2022-09-01 11:49:21</span><br><span class="line">cover:</span><br><span class="line">mp3: http://domain.com/awesome.mp3</span><br><span class="line">categories: </span><br><span class="line">    - 分类1</span><br><span class="line">    - 分类2</span><br><span class="line">tags: </span><br><span class="line">    - 标签1</span><br><span class="line">    - 标签2</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate         <span class="comment"># 生成静态HTML文件到 /public 文件夹中</span></span><br><span class="line">hexo server           <span class="comment"># 本地运行server服务预览，打开 http://localhost:4000 即可预览你的博客</span></span><br><span class="line"></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot; &quot;</span></span><br><span class="line">git push -u origin main <span class="comment">#github密码需要去官网生成</span></span><br><span class="line"></span><br><span class="line">只需要修改博客的配置文件和博客本身的markdown源文件，然后push到github上，netlify会自动运行当初配置的建站脚本，然后将生成在public文件夹中的静态网页部署出去。</span><br></pre></td></tr></table></figure>
+
+<p>更详细的<code>hexo</code>命令可以查看文档：<a href="https://hexo.io/zh-cn/docs/commands">https://hexo.io/zh-cn/docs/commands</a><br>本博客制作，参考： <a href="https://blog.cuijiacai.com/blog-building/">https://blog.cuijiacai.com/blog-building/</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>grafana添加dashboard</title>
+    <url>/2022/10/14/grafana%E6%B7%BB%E5%8A%A0dashboard/</url>
+    <content><![CDATA[<p><a href="https://grafana.com/">Grafana</a> 是一个用于可视化大型测量数据的开源系统监测 (System Monitoring) 工具。</p>
+<p>它的功能非常强大，界面也非常漂亮，使用它可以创建自定义的控制面板，你可以在面板中配置要显示的数据和显示方式，它 <a href="https://grafana.com/plugins?type=datasource">支持很多不同的数据源</a>，比如：Graphite、InfluxDB、OpenTSDB、Elasticsearch、Prometheus 等，而且它也 <a href="https://grafana.com/plugins">支持众多的插件</a>。</p>
+<h3 id="1-登录"><a href="#1-登录" class="headerlink" title="1.登录"></a>1.登录</h3><p>对grafana进行更改，需要先登录，账号密码均为：admin</p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/1.png" alt="image-20221014134758482"></p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/2.png" alt="image-20221014134839380"></p>
+<h3 id="2-设置数据源"><a href="#2-设置数据源" class="headerlink" title="2.设置数据源"></a>2.设置数据源</h3><p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/3.png" alt="image-20221014134923741"></p>
+<p>添加数据源，grafana支持非常多的数据库，这里选择prometheus</p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/4.png" alt="image-20221010093606814"></p>
+<p>设置url</p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/5.png" alt="image-20221010094812444"></p>
+<p>Save &amp; test, 出现Data source is working 数据源就设置成功了。</p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/6.png" alt="image-20221010095045378"></p>
+<h3 id="3-添加dashboard"><a href="#3-添加dashboard" class="headerlink" title="3.添加dashboard"></a>3.添加dashboard</h3><p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/7.png" alt="image-20221010100415736"></p>
+<p>也可以对已有dashboard进行修改</p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/8.png" alt="image-20221014134054493"></p>
+<p>dashboard由一系列的panel组成</p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/9.png" alt="image-20221014133359618"></p>
+<p>可以对已有panel进行修改，也可以新建panel</p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/10.png" alt="image-20221014133604287"></p>
+<p>新建一个panel</p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/11.png" alt="image-20221014133809285"></p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/12.png" alt="image-20221014134632367"></p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/13.png" alt="image-20221014135814691"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>docker部署程序</title>
+    <url>/2022/09/01/docker%E9%83%A8%E7%BD%B2%E7%A8%8B%E5%BA%8F/</url>
+    <content><![CDATA[<h2 id="1-source-code"><a href="#1-source-code" class="headerlink" title="1.source code"></a>1.source code</h2><p>见 src 目录下：《main.go》,《controller.go》,《service.go》,《mapper.go》,《user.go》.</p>
+<h2 id="2-dockerfile"><a href="#2-dockerfile" class="headerlink" title="2.dockerfile"></a>2.dockerfile</h2><p>见《dockerfile》.</p>
+<h2 id="3-复制到linux目录下"><a href="#3-复制到linux目录下" class="headerlink" title="3.复制到linux目录下"></a>3.复制到linux目录下</h2><p>将上面的文件复制到Linux目录下.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># ls</span></span><br><span class="line">controller.go  dockerfile  main.go  mapper.go  service.go  user.go</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-制作镜像"><a href="#4-制作镜像" class="headerlink" title="4. 制作镜像"></a>4. 制作镜像</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-t : tag</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># docker build -t test:v0.1.2 .</span></span><br><span class="line">Sending build context to Docker daemon  14.34kB</span><br><span class="line">Step 1/7 : FROM golang:latest</span><br><span class="line"> ---&gt; 276895edf967</span><br><span class="line">Step 2/7 : MAINTAINER zhongrongbin@casachina.com.cn</span><br><span class="line"> ---&gt; Using cache</span><br><span class="line"> ---&gt; d40cc886be6b</span><br><span class="line">Step 3/7 : COPY . /usr/src/httpServer</span><br><span class="line"> ---&gt; 8106f3dfba3f</span><br><span class="line">Step 4/7 : WORKDIR /usr/src/httpServer</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 3bc07133e07b</span><br><span class="line">Removing intermediate container 3bc07133e07b</span><br><span class="line"> ---&gt; ea73eadb4492</span><br><span class="line">Step 5/7 : EXPOSE 80</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> d95d85d48d7d</span><br><span class="line">Removing intermediate container d95d85d48d7d</span><br><span class="line"> ---&gt; 39162dd82c62</span><br><span class="line">Step 6/7 : RUN go build -o server main.go controller.go service.go mapper.go user.go</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> eb92d98a2065</span><br><span class="line">Removing intermediate container eb92d98a2065</span><br><span class="line"> ---&gt; 9a274f15d320</span><br><span class="line">Step 7/7 : CMD ./server</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 1a7cae0541ea</span><br><span class="line">Removing intermediate container 1a7cae0541ea</span><br><span class="line"> ---&gt; 7e09d7c4eadb</span><br><span class="line">Successfully built 7e09d7c4eadb</span><br><span class="line">Successfully tagged <span class="built_in">test</span>:v0.1.2</span><br></pre></td></tr></table></figure>
+
+<p>查看镜像</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment">#  docker images</span></span><br><span class="line">REPOSITORY                                                  TAG          IMAGE ID       CREATED          SIZE</span><br><span class="line"><span class="built_in">test</span>                                                        v0.1.2       7e09d7c4eadb   22 seconds ago   947MB</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-运行容器"><a href="#5-运行容器" class="headerlink" title="5.运行容器"></a>5.运行容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-d : 后台运行  -p: 端口</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># docker run -dp 127.0.0.1:80:80 test:v0.1.2</span></span><br><span class="line">bcf28eedcaab94d59f21cc3be476037a56800f81743332d1b3b82d0ab1560a29</span><br></pre></td></tr></table></figure>
+
+<p>查看容器：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID   IMAGE                                                       COMMAND                  CREATED          STATUS          PORTS                                       NAMES</span><br><span class="line">bcf28eedcaab   <span class="built_in">test</span>:v0.1.2                                                 <span class="string">&quot;/bin/sh -c ./server&quot;</span>    30 seconds ago   Up 28 seconds   127.0.0.1:80-&gt;80/tcp                        recursing_wilbur</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-打开wireshark"><a href="#6-打开wireshark" class="headerlink" title="6.打开wireshark"></a>6.打开wireshark</h2><p>接下来，愉快地开始测试吧!</p>
+<h2 id="7-测试"><a href="#7-测试" class="headerlink" title="7.测试"></a>7.测试</h2><h3 id="function-1-hello"><a href="#function-1-hello" class="headerlink" title="function 1: hello"></a>function 1: hello</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~<span class="comment"># curl 127.0.0.1/hello</span></span><br><span class="line">200</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="function-2-添加用户"><a href="#function-2-添加用户" class="headerlink" title="function 2:添加用户"></a>function 2:添加用户</h3><h4 id="a-add-user-only-name"><a href="#a-add-user-only-name" class="headerlink" title="a.  add user, only name"></a>a.  add user, only name</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/add-user?name=zhao6</span></span><br><span class="line">201, user saved successfully</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="b-add-uesr-all-attributes"><a href="#b-add-uesr-all-attributes" class="headerlink" title="b. add uesr, all attributes"></a>b. add uesr, all attributes</h4><p><em><strong>linux 环境下，url 传递多参数时，需要加双引号。</strong></em></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl &quot;127.0.0.1/add-user?name=qina7&amp;age=18&amp;sex=male&amp;address=beijing&quot;</span></span><br><span class="line">201, user saved successfully</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="c-add-user-some-attributes"><a href="#c-add-user-some-attributes" class="headerlink" title="c. add user, some attributes"></a>c. add user, some attributes</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl &quot;127.0.0.1/add-user?name=wang8&amp;age=10000&amp;sex=male&quot;201, user saved successfully</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="function-3-获取所有用户"><a href="#function-3-获取所有用户" class="headerlink" title="function 3:获取所有用户"></a>function 3:获取所有用户</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/get-all-user</span></span><br><span class="line">&#123;<span class="string">&quot;li4&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;li4&quot;</span>,<span class="string">&quot;age&quot;</span>:20,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;female&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;shenzhen&quot;</span>&#125;,<span class="string">&quot;qina7&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;qina7&quot;</span>,<span class="string">&quot;age&quot;</span>:18,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;male&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;beijing&quot;</span>&#125;,<span class="string">&quot;wang5&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wang5&quot;</span>,<span class="string">&quot;age&quot;</span>:21,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;male&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;beijing&quot;</span>&#125;,<span class="string">&quot;wang8&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wang8&quot;</span>,<span class="string">&quot;age&quot;</span>:10000,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;male&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;&quot;</span>&#125;,<span class="string">&quot;zhang3&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;zhang3&quot;</span>,<span class="string">&quot;age&quot;</span>:19,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;male&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;guangzhou&quot;</span>&#125;,<span class="string">&quot;zhao6&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;zhao6&quot;</span>,<span class="string">&quot;age&quot;</span>:0,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;&quot;</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="function-4-删除一个用户"><a href="#function-4-删除一个用户" class="headerlink" title="function 4:删除一个用户"></a>function 4:删除一个用户</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/delete-user?name=zhang3</span></span><br><span class="line">200, successfully deleted</span><br></pre></td></tr></table></figure>
+
+<p>zhang3 被删除:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/get-all-user</span></span><br><span class="line">&#123;<span class="string">&quot;li4&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;li4&quot;</span>,<span class="string">&quot;age&quot;</span>:20,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;female&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;shenzhen&quot;</span>&#125;,<span class="string">&quot;qina7&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;qina7&quot;</span>,<span class="string">&quot;age&quot;</span>:18,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;male&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;beijing&quot;</span>&#125;,<span class="string">&quot;wang5&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wang5&quot;</span>,<span class="string">&quot;age&quot;</span>:21,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;male&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;beijing&quot;</span>&#125;,<span class="string">&quot;wang8&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wang8&quot;</span>,<span class="string">&quot;age&quot;</span>:10000,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;male&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;&quot;</span>&#125;,<span class="string">&quot;zhao6&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;zhao6&quot;</span>,<span class="string">&quot;age&quot;</span>:0,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;&quot;</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="function-5-删除所有用户"><a href="#function-5-删除所有用户" class="headerlink" title="function 5:删除所有用户"></a>function 5:删除所有用户</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/delete-all-user</span></span><br><span class="line">200, delete all <span class="built_in">users</span> successfully</span><br></pre></td></tr></table></figure>
+
+
+
+<p>所有用户被删除：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/get-all-user</span></span><br><span class="line">no user</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="function-6：更新用户属性"><a href="#function-6：更新用户属性" class="headerlink" title="function 6：更新用户属性"></a>function 6：更新用户属性</h3><h4 id="a-update-user-all-attributes"><a href="#a-update-user-all-attributes" class="headerlink" title="a. update user, all attributes"></a>a. update user, all attributes</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl &quot;127.0.0.1/add-user?name=wang8&amp;age=10000&amp;sex=male&quot;</span></span><br><span class="line">201, user saved successfully</span><br><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/get-all-user</span></span><br><span class="line">&#123;<span class="string">&quot;wang8&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wang8&quot;</span>,<span class="string">&quot;age&quot;</span>:10000,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;male&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;&quot;</span>&#125;&#125;</span><br><span class="line">root@ubuntu:~/test<span class="comment"># curl &quot;127.0.0.1/update-user?name=wang8&amp;age=90000&amp;sex=female&amp;address=ganzhou&quot;</span></span><br><span class="line">201, user update successfully</span><br><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/get-all-user</span></span><br><span class="line">&#123;<span class="string">&quot;wang8&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wang8&quot;</span>,<span class="string">&quot;age&quot;</span>:90000,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;female&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;ganzhou&quot;</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="b-update-user-some-attributes"><a href="#b-update-user-some-attributes" class="headerlink" title="b. update user, some attributes"></a>b. update user, some attributes</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/get-all-user</span></span><br><span class="line">&#123;<span class="string">&quot;wang8&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wang8&quot;</span>,<span class="string">&quot;age&quot;</span>:90000,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;female&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;ganzhou&quot;</span>&#125;&#125;</span><br><span class="line">root@ubuntu:~/test<span class="comment"># curl &quot;127.0.0.1/update-user?name=wang8&amp;age=18&amp;address=beijing&quot;</span></span><br><span class="line">201, user update successfully</span><br><span class="line">root@ubuntu:~/test<span class="comment"># curl 127.0.0.1/get-all-user</span></span><br><span class="line">&#123;<span class="string">&quot;wang8&quot;</span>:&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;wang8&quot;</span>,<span class="string">&quot;age&quot;</span>:18,<span class="string">&quot;sex&quot;</span>:<span class="string">&quot;female&quot;</span>,<span class="string">&quot;address&quot;</span>:<span class="string">&quot;beijing&quot;</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><h4 id="Add-an-existing-user"><a href="#Add-an-existing-user" class="headerlink" title="Add an existing user"></a>Add an existing user</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl &quot;127.0.0.1/add-user?name=wang8&amp;age=20&quot;</span></span><br><span class="line">user already exist</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="delete-a-non-existent-user"><a href="#delete-a-non-existent-user" class="headerlink" title="delete a non-existent user"></a>delete a non-existent user</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl &quot;127.0.0.1/delete-user?name=zhang3&quot;</span></span><br><span class="line">user does not exist</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Update-a-non-existent-user"><a href="#Update-a-non-existent-user" class="headerlink" title="Update a non-existent user"></a>Update a non-existent user</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~/test<span class="comment"># curl &quot;127.0.0.1/update-user?name=zhang3&amp;age=18&amp;address=beijing&quot;</span></span><br><span class="line">user does not exist</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>hello world</title>
+    <url>/2022/09/01/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>prometheus入门</title>
+    <url>/2022/09/30/prometheus%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h2 id="Prometheus"><a href="#Prometheus" class="headerlink" title="Prometheus"></a>Prometheus</h2><p><a href="https://prometheus.io/">Prometheus</a> 是一款基于时序数据库的开源监控告警系统。</p>
+<h3 id="1-核心组件"><a href="#1-核心组件" class="headerlink" title="1.核心组件"></a>1.核心组件</h3><p>整个Prometheus生态包含多个组件，除了Prometheus server组件其余都是可选的</p>
+<ul>
+<li><strong>Prometheus Server</strong>：主要的核心组件，用来收集和存储时间序列数据。</li>
+<li><strong>Client Library</strong>：客户端库，为需要监控的服务生成相应的 metrics 并暴露给 Prometheus server。当 Prometheus server 来 pull 时，直接返回实时状态的 metrics。</li>
+<li><strong>push gateway</strong>：主要用于短期的 jobs。由于这类 jobs 存在时间较短，可能在 Prometheus 来 pull 之前就消失了。为此，这次 jobs 可以直接向 Prometheus server 端推送它们的 metrics。这种方式主要用于服务层面的 metrics，对于机器层面的 metrices，需要使用 node exporter。</li>
+<li><strong>Exporters</strong>: 用于暴露已有的第三方服务的 metrics 给 Prometheus。</li>
+<li><strong>Alertmanager</strong>: 从 Prometheus server 端接收到 alerts 后，会进行去除重复数据，分组，并路由到对收的接受方式，发出报警。常见的接收方式有：电子邮件，pagerduty，OpsGenie, webhook 等。</li>
+<li>各种支持工具。</li>
+</ul>
+<p><img src="/images/prometheus%E5%85%A5%E9%97%A8/jiagou.png" alt="jiagou"></p>
+<h3 id="2-模块介绍"><a href="#2-模块介绍" class="headerlink" title="2.模块介绍"></a>2.<strong>模块介绍</strong></h3><ul>
+<li><strong>Retrieval</strong>是负责定时去暴露的目标页面上去抓取采样指标数据。</li>
+<li><strong>Storage</strong> 是负责将采样数据写入指定的时序数据库存储。</li>
+<li><strong>PromQL</strong> 是Prometheus提供的查询语言模块。可以和一些webui比如grfana集成。</li>
+<li><strong>Jobs &#x2F; Exporters</strong>:Prometheus 可以从 Jobs 或 Exporters 中拉取监控数据。Exporter 以 Web API 的形式对外暴露数据采集接口。</li>
+<li><strong>Prometheus Server</strong>:Prometheus 还可以从其他的 Prometheus Server 中拉取数据。</li>
+<li><strong>Pushgateway</strong>:对于一些以临时性 Job 运行的组件，Prometheus 可能还没有来得及从中 pull 监控数据的情况下，这些 Job 已经结束了，Job 运行时可以在运行时将监控数据推送到 Pushgateway 中，Prometheus 从 Pushgateway 中拉取数据，防止监控数据丢失。</li>
+<li><strong>Service discovery</strong>:是指 Prometheus 可以动态的发现一些服务，拉取数据进行监控，如从DNS，Kubernetes，Consul 中发现, file_sd 是静态配置的文件。</li>
+<li><strong>AlertManager</strong>:是一个独立于 Prometheus 的外部组件，用于监控系统的告警，通过配置文件可以配置一些告警规则，Prometheus 会把告警推送到 AlertManager。</li>
+</ul>
+<h3 id="3-工作流程"><a href="#3-工作流程" class="headerlink" title="3.工作流程"></a>3.工作流程</h3><p>大概的工作流程如下：</p>
+<ul>
+<li>Prometheus server 定期从配置好的 jobs，exporters，Pushgateway  中拉 metrics，或者从其他的 Prometheus server 中拉 metrics。</li>
+<li>Prometheus server 在本地存储收集到的 metrics，并运行已定义好的 alert.rules，记录新的时间序列或者向 Alertmanager 推送警报。</li>
+<li>Alertmanager 根据配置文件，对接收到的警报进行处理，发出告警。</li>
+<li>在图形界面中，可视化采集数据。</li>
+</ul>
+<h3 id="4-多维度数据模型"><a href="#4-多维度数据模型" class="headerlink" title="4.多维度数据模型"></a>4.多维度数据模型</h3><h4 id="（1）数据模型"><a href="#（1）数据模型" class="headerlink" title="（1）数据模型"></a>（1）数据模型</h4><p>Prometheus 存储的所有数据都是<strong>时间序列数据</strong>（<strong>Time Serie Data</strong>，简称时序数据）。时序数据是具有时间戳的数据流，该数据流属于某个度量指标（Metric）和该度量指标下的多个标签（Label）。</p>
+<p><img src="/images/prometheus%E5%85%A5%E9%97%A8/datamodel.png" alt="datamodel"></p>
+<p>每个Metric name代表了一类的指标，他们可以携带不同的Labels，每个Metric name + Label组合成代表了一条时间序列的数据。</p>
+<p>在Prometheus的世界里面，所有的数值都是64bit的。每条时间序列里面记录的其实就是**64bit timestamp(时间戳) + 64bit value(采样值)**。</p>
+<ul>
+<li><strong>Metric name（指标名称）</strong>：该名字应该具有语义，一般用于表示 metric 的功能，例如：http_requests_total, 表示 http 请求的总数。其中，metric 名字由 ASCII 字符，数字，下划线，以及冒号组成，且必须满足正则表达式 [a-zA-Z_:][a-zA-Z0-9_:]*。</li>
+<li><strong>Lables（标签）</strong>：使同一个时间序列有了不同维度的识别。例如 http_requests_total{method&#x3D;“Get”} 表示所有 http 请求中的 Get 请求。当 method&#x3D;“post” 时，则为新的一个 metric。标签中的键由 ASCII 字符，数字，以及下划线组成，且必须满足正则表达式 [a-zA-Z_:][a-zA-Z0-9_:]*。</li>
+<li>**timestamp(时间戳)**：数据点的时间，表示数据记录的时间。</li>
+<li><strong>Sample Value（采样值）</strong>：实际的时间序列，每个序列包括一个 float64 的值和一个毫秒级的时间戳。</li>
+</ul>
+<h4 id="（2）metric类型"><a href="#（2）metric类型" class="headerlink" title="（2）metric类型"></a>（2）metric类型</h4><p>虽然 Prometheus 里存储的数据都是 float64 的一个数值，但如果我们按类型来分，可以把 Prometheus 的数据分成四大类：</p>
+<ul>
+<li>Counter（计数器）</li>
+<li>Gauge（仪表盘）</li>
+<li>Histogram（直方图）</li>
+<li>Summary（摘要）</li>
+</ul>
+<p>Counter 用于计数，例如：请求次数、任务完成数、错误发生次数，这个值会一直增加，不会减少。</p>
+<p>Gauge 是一个<strong>瞬时值</strong>，如当前内存用量，它随着时间变化忽高忽低。</p>
+<p>Histogram 是直方图，或称为柱状图，常用于跟踪事件发生的规模，例如：请求耗时、响应大小。它特别之处是可以对记录的内容进行分组，提供 count 和 sum 的功能。</p>
+<p>Summary 和 Histogram 十分相似，也用于跟踪事件发生的规模，不同之处是，它提供了一个 quantiles 的功能，可以按百分比划分跟踪的结果。例如：quantile 取值 0.95，表示取采样值里面的 95% 数据。</p>
+<p>这四种类型的数据只在指标的提供方作区分，也就是上面说的 Exporter，如果你需要编写自己的 Exporter 或者在现有系统中暴露供 Prometheus 抓取的指标，你可以使用 <a href="https://prometheus.io/docs/instrumenting/clientlibs/">Prometheus client libraries</a>，这个时候你就需要考虑不同指标的数据类型了。</p>
+<h3 id="5-灵活的数据采集"><a href="#5-灵活的数据采集" class="headerlink" title="5.灵活的数据采集"></a>5.灵活的数据采集</h3><p>要采集目标的监控数据，首先需要在目标处安装数据采集组件，这被称之为 <strong>Exporter</strong>，它会在目标处收集监控数据，并暴露出一个 HTTP 接口供 Prometheus 查询，Prometheus 通过 Pull 的方式来采集数据，这和传统的 Push 模式不同。不过 Prometheus 也提供了一种方式来支持 Push 模式，你可以将你的数据推送到 <strong>Push Gateway</strong>，Prometheus 通过 Pull 的方式从 Push Gateway 获取数据。</p>
+<h3 id="6-强大的查询语言"><a href="#6-强大的查询语言" class="headerlink" title="6.强大的查询语言"></a>6.强大的查询语言</h3><h4 id="（1）即时矢量选择器"><a href="#（1）即时矢量选择器" class="headerlink" title="（1）即时矢量选择器"></a>（1）即时矢量选择器</h4><p>即时向量选择器允许选择一组时间序列，或者某个给定的时间戳的样本数据。下面这个例子选择了具有http_requests_total的时间序列：</p>
+<blockquote>
+<p>http_requests_total</p>
+</blockquote>
+<p>你可以通过附加一组标签，并用{}括起来，来进一步筛选这些时间序列。下面这个例子只选择有http_requests_total名称的、有prometheus工作标签的、有canary组标签的时间序列：</p>
+<blockquote>
+<p>http_requests_total{job&#x3D;”prometheus”,group&#x3D;”canary”}</p>
+</blockquote>
+<p>另外，也可以也可以将标签值反向匹配，或者对正则表达式匹配标签值。下面列举匹配操作符：</p>
+<ul>
+<li>&#x3D;：选择正好相等的字符串标签</li>
+<li>!&#x3D;：选择不相等的字符串标签</li>
+<li>&#x3D;~：选择匹配正则表达式的标签（或子标签）</li>
+<li>!~：选择不匹配正则表达式的标签（或子标签）</li>
+</ul>
+<p>例如，选择staging、testing、development环境下的，GET之外的HTTP方法的http_requests_total的时间序列：</p>
+<blockquote>
+<p>http_requests_total{environment&#x3D;~”staging|testing|development”,method!&#x3D;”GET”}</p>
+</blockquote>
+<h4 id="（2）范围矢量选择器"><a href="#（2）范围矢量选择器" class="headerlink" title="（2）范围矢量选择器"></a>（2）范围矢量选择器</h4><p>范围向量表达式正如即时向量表达式一样运行，但是前者返回从当前时刻开始的一定时间范围的时间序列集合回来。语法是，在一个向量表达式之后添加[]来表示时间范围，持续时间用数字表示，后接下面单元之一：</p>
+<ul>
+<li>s：seconds</li>
+<li>m：minutes</li>
+<li>h：hours</li>
+<li>d：days</li>
+<li>w：weeks</li>
+<li>y：years</li>
+</ul>
+<p>在下面这个例子中，我们选择最后5分钟的记录，metric名称为http_requests_total、作业标签为prometheus的时间序列的所有值：</p>
+<blockquote>
+<p>http_requests_total{job&#x3D;”prometheus”}[5m]</p>
+</blockquote>
+<h4 id="（3）偏移量修改器"><a href="#（3）偏移量修改器" class="headerlink" title="（3）偏移量修改器"></a>（3）偏移量修改器</h4><p>所述offset可以改变时间为查询中的个别时刻和范围矢量偏移。例如，以下表达式返回http_requests_total相对于当前查询评估时间的过去5分钟值 ：</p>
+<blockquote>
+<p>http_requests_total offset 5m</p>
+</blockquote>
+<p>同样适用于范围向量。这将返回http_requests_total一周前的5分钟费率 ：</p>
+<blockquote>
+<p>rate(http_requests_total[5m] offset 1w)</p>
+</blockquote>
+<p>更多<strong>操作符</strong>，请参考<a href="https://prometheus.io/docs/prometheus/latest/querying/operators/">官方文档</a></p>
+<h4 id="（4）使用聚合操作"><a href="#（4）使用聚合操作" class="headerlink" title="（4）使用聚合操作"></a>（4）使用聚合操作</h4><blockquote>
+<p>PromQL提供的聚合操作可以用来对这些时间序列进行处理，形成一条新的时间序列</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查询系统所有http请求的总量</span></span><br><span class="line"><span class="built_in">sum</span>(http_request_total)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照mode计算主机CPU的平均使用时间</span></span><br><span class="line">avg(node_cpu) by (mode)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照主机查询各个主机的CPU使用率</span></span><br><span class="line"><span class="built_in">sum</span>(<span class="built_in">sum</span>(irate(node_cpu&#123;mode!=<span class="string">&#x27;idle&#x27;</span>&#125;[5m]))  / <span class="built_in">sum</span>(irate(node_cpu[5m]))) by (instance)</span><br></pre></td></tr></table></figure>
+
+<p>常见的聚合函数</p>
+<blockquote>
+<p>sum (求和)<br>min (最小值)<br>max (最大值)<br>avg (平均值)<br>stddev (标准差)<br>stdvar (标准方差)<br>count (计数)<br>count_values (对value进行计数)<br>bottomk (后n条时序)<br>topk (前n条时序)<br>quantile (分位数)</p>
+</blockquote>
+<h3 id="7-exporter规范"><a href="#7-exporter规范" class="headerlink" title="7.exporter规范"></a>7.exporter规范</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># HELP aggregator_openapi_v2_regeneration_duration [ALPHA] Gauge of OpenAPI v2 spec regeneration duration in seconds.</span></span><br><span class="line"><span class="comment"># TYPE aggregator_openapi_v2_regeneration_duration gauge</span></span><br><span class="line">aggregator_openapi_v2_regeneration_duration&#123;reason=<span class="string">&quot;add&quot;</span>&#125; 0.929158077</span><br><span class="line">aggregator_openapi_v2_regeneration_duration&#123;reason=<span class="string">&quot;startup&quot;</span>&#125; 0.509336209</span><br></pre></td></tr></table></figure>
+
+<p>Exporter返回的样本数据，主要由三个部分组成：<strong>样本的一般注释信息（HELP），样本的类型注释信息（TYPE）和样本</strong>。</p>
+<p>Prometheus会对Exporter响应的内容逐行解析：</p>
+<ul>
+<li>如果当前行以# HELP开始，Prometheus将会按照以下规则对内容进行解析，得到当前的指标名称以及相应的说明信息：</li>
+</ul>
+<blockquote>
+<p># HELP <metrics_name> <doc_string></doc_string></metrics_name></p>
+</blockquote>
+<ul>
+<li>如果当前行以# TYPE开始，Prometheus会按照以下规则对内容进行解析，得到当前的指标名称以及指标类型:</li>
+</ul>
+<blockquote>
+<p># TYPE <metrics_name> <metrics_type></metrics_type></metrics_name></p>
+</blockquote>
+<ul>
+<li><strong>TYPE注释行必须出现在指标的第一个样本之前</strong>。如果没有明确的指标类型需要返回为untyped。 除了# 开头的所有行都会被视为是监控样本数据。 每一行样本需要满足以下格式规范:</li>
+</ul>
+<blockquote>
+<p>metric_name [<br>“{“ label_name “&#x3D;” <code>&quot;</code> label_value <code>&quot;</code> { “,” label_name “&#x3D;” <code>&quot;</code> label_value <code>&quot;</code> } [ “,” ] “}”<br>] value [ timestamp ]</p>
+</blockquote>
+<h3 id="8-服务发现"><a href="#8-服务发现" class="headerlink" title="8.服务发现"></a>8.服务发现</h3><blockquote>
+<p>任何被监控的目标都需要事先纳入到监控系统中才能进行时序数据采集、存储、告警和展示，监控目标可以通过配置信息以<strong>静态形式指定</strong>，也可以让Prometheus通过<strong>服务发现</strong>的机制进行动态管理。</p>
+</blockquote>
+<h4 id="（1）传统配置"><a href="#（1）传统配置" class="headerlink" title="（1）传统配置"></a>（1）传统配置</h4><p>讲服务发现之前，先来讲一下<strong>传统配置方式</strong>:</p>
+<ol>
+<li>首先需要安装node-exporter，获取node metrics，并且暴露一个端口；</li>
+<li>然后去Prometheus Server的prometheus.yaml文件中在scarpe_config中添加node-exporter的job，配置node-exporter的地址和端口等信息；</li>
+<li>再然后，<strong>需要重启Prometheus服务</strong>；</li>
+<li>最后等待prometheus服务来拉取监控信息，就完成添加一个node-exporter监控的任务。</li>
+</ol>
+<h4 id="（2）kube-prometheus服务自动发现"><a href="#（2）kube-prometheus服务自动发现" class="headerlink" title="（2）kube-prometheus服务自动发现"></a>（2）kube-prometheus服务自动发现</h4><ol>
+<li>首先第一步和传统方式一样，部署一个node-exporter来获取监控项；</li>
+<li>然后编写一个ServiceMonitor通过labelSelector选择刚才部署的node-exporter，由于Operator在部署Prometheus的时候默认指定了Prometheus选择label为：prometheus: kube-prometheus的ServiceMonitor，所以只需要在ServiceMonitor上打上prometheus: kube-prometheus标签就可以被Prometheus选择了；</li>
+<li>完成以上两步就完成了对主机资源的监控，不需要改Prometheus配置文件，也<strong>不需要重启Prometheus服务</strong>，是不是很方便，Operator观察到ServiceMonitor发生变化，会动态生成Prometheus配置文件，并保证配置文件实时生效。</li>
+</ol>
+<p>目前，在Kubernetes下，Prometheus 通过与 Kubernetes API 集成主要支持5种服务发现模式：Node、Service、Pod、Endpoints、Ingress。不同的服务发现模式适用于不同的场景，例如：node适用于与主机相关的监控资源，如节点中运行的Kubernetes 组件状态、节点上运行的容器状态等；service 和 ingress 适用于通过黑盒监控的场景，如对服务的可用性以及服务质量的监控；endpoints 和 pod 均可用于获取 Pod 实例的监控数据，如监控用户或者管理员部署的支持 Prometheus 的应用。</p>
+<h2 id="Grafana"><a href="#Grafana" class="headerlink" title="Grafana"></a>Grafana</h2><p><a href="https://grafana.com/">Grafana</a> 是一个用于可视化大型测量数据的开源系统监测 (System Monitoring) 工具。</p>
+<p>它的功能非常强大，界面也非常漂亮，使用它可以创建自定义的控制面板，你可以在面板中配置要显示的数据和显示方式，它 <a href="https://grafana.com/plugins?type=datasource">支持很多不同的数据源</a>，比如：Graphite、InfluxDB、OpenTSDB、Elasticsearch、Prometheus 等，而且它也 <a href="https://grafana.com/plugins">支持众多的插件</a>。</p>
+<h2 id="refer"><a href="#refer" class="headerlink" title="refer"></a>refer</h2><p><a href="https://www.cnblogs.com/liugp/p/16459922.html">Prometheus原理详解</a></p>
+<p><a href="https://www.aneasystone.com/archives/2018/11/prometheus-in-action.html">实战 Prometheus 搭建监控系统</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1802679">Kubernetes 集群监控 kube-prometheus 自动发现</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1807679">Grafana 中文入门教程 | 构建你的第一个仪表盘</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>烦人的go导包</title>
+    <url>/2022/09/16/%E7%83%A6%E4%BA%BA%E7%9A%84go%E5%AF%BC%E5%8C%85/</url>
+    <content><![CDATA[<h1 id="导入自己写的文件"><a href="#导入自己写的文件" class="headerlink" title="导入自己写的文件"></a>导入自己写的文件</h1><h2 id="1-Project-gopath-设置为项目路径"><a href="#1-Project-gopath-设置为项目路径" class="headerlink" title="1.Project gopath 设置为项目路径"></a>1.Project gopath 设置为项目路径</h2><p><img src="/images/%E7%83%A6%E4%BA%BA%E7%9A%84go%E5%AF%BC%E5%8C%85/p1.png" alt="project path"></p>
+<h2 id="2-将文件放在src目录下"><a href="#2-将文件放在src目录下" class="headerlink" title="2.将文件放在src目录下"></a>2.将文件放在src目录下</h2><p><img src="/images/%E7%83%A6%E4%BA%BA%E7%9A%84go%E5%AF%BC%E5%8C%85/p2.png" alt="src"></p>
+<h1 id="导入外部文件"><a href="#导入外部文件" class="headerlink" title="导入外部文件"></a>导入外部文件</h1><p>go get 后, 导入爆红：</p>
+<p><img src="/images/%E7%83%A6%E4%BA%BA%E7%9A%84go%E5%AF%BC%E5%8C%85/p3.png" alt="moudle"></p>
+]]></content>
+  </entry>
+</search>

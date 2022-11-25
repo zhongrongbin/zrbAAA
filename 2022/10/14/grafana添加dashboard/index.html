@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>grafana添加dashboard - ZRB的博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="RB,"> 
+    <meta name="description" content="Grafana 是一个用于可视化大型测量数据的开源系统监测 (System Monitoring) 工具。
+它的功能非常强大，界面也非常漂亮，使用它可以创建自定义的控制面板，你可以在面板中配置要显示,"> 
+    <meta name="author" content="Rongbin Zhong"> 
+    <link rel="alternative" href="atom.xml" title="ZRB的博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/zrb.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="grafana添加dashboard - ZRB的博客"/>
+    <meta name="twitter:description" content="Grafana 是一个用于可视化大型测量数据的开源系统监测 (System Monitoring) 工具。
+它的功能非常强大，界面也非常漂亮，使用它可以创建自定义的控制面板，你可以在面板中配置要显示,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="ZRB的博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="grafana添加dashboard - ZRB的博客"/>
+    <meta property="og:description" content="Grafana 是一个用于可视化大型测量数据的开源系统监测 (System Monitoring) 工具。
+它的功能非常强大，界面也非常漂亮，使用它可以创建自定义的控制面板，你可以在面板中配置要显示,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">ZRB的博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">grafana添加dashboard</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">grafana添加dashboard</h1>
+        <div class="stuff">
+            <span>十月 14, 2022</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p><a target="_blank" rel="noopener" href="https://grafana.com/">Grafana</a> 是一个用于可视化大型测量数据的开源系统监测 (System Monitoring) 工具。</p>
+<p>它的功能非常强大，界面也非常漂亮，使用它可以创建自定义的控制面板，你可以在面板中配置要显示的数据和显示方式，它 <a target="_blank" rel="noopener" href="https://grafana.com/plugins?type=datasource">支持很多不同的数据源</a>，比如：Graphite、InfluxDB、OpenTSDB、Elasticsearch、Prometheus 等，而且它也 <a target="_blank" rel="noopener" href="https://grafana.com/plugins">支持众多的插件</a>。</p>
+<h3 id="1-登录"><a href="#1-登录" class="headerlink" title="1.登录"></a>1.登录</h3><p>对grafana进行更改，需要先登录，账号密码均为：admin</p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/1.png" alt="image-20221014134758482"></p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/2.png" alt="image-20221014134839380"></p>
+<h3 id="2-设置数据源"><a href="#2-设置数据源" class="headerlink" title="2.设置数据源"></a>2.设置数据源</h3><p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/3.png" alt="image-20221014134923741"></p>
+<p>添加数据源，grafana支持非常多的数据库，这里选择prometheus</p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/4.png" alt="image-20221010093606814"></p>
+<p>设置url</p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/5.png" alt="image-20221010094812444"></p>
+<p>Save &amp; test, 出现Data source is working 数据源就设置成功了。</p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/6.png" alt="image-20221010095045378"></p>
+<h3 id="3-添加dashboard"><a href="#3-添加dashboard" class="headerlink" title="3.添加dashboard"></a>3.添加dashboard</h3><p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/7.png" alt="image-20221010100415736"></p>
+<p>也可以对已有dashboard进行修改</p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/8.png" alt="image-20221014134054493"></p>
+<p>dashboard由一系列的panel组成</p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/9.png" alt="image-20221014133359618"></p>
+<p>可以对已有panel进行修改，也可以新建panel</p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/10.png" alt="image-20221014133604287"></p>
+<p>新建一个panel</p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/11.png" alt="image-20221014133809285"></p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/12.png" alt="image-20221014134632367"></p>
+<p><img src="/images/grafana%E6%B7%BB%E5%8A%A0dashboard/13.png" alt="image-20221014135814691"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci="7ebf69d7d37e764fc978"
+        data-cs="f1d17dce3417ae7633733671c141f49b19e9e3c3"
+        data-r="gitalk-comments"
+        data-o="zhongrongbin"
+        data-a="zhongrongbin"
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%99%BB%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">1.登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%AE%BE%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90"><span class="toc-number">2.</span> <span class="toc-text">2.设置数据源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B7%BB%E5%8A%A0dashboard"><span class="toc-number">3.</span> <span class="toc-text">3.添加dashboard</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
+
